@@ -1,3 +1,4 @@
+import { PlaywrightCrawler } from 'crawlee';
 import { Service } from 'egg';
 
 export enum SpiderType {
@@ -15,6 +16,32 @@ export interface GetSourceCodeParams {
   type?: SpiderType;
 }
 
+const createCrawler = (config: GetSourceCodeParams) => {
+  const { target } = config;
+  return new Promise<string>(resolve => {
+    const crawler = new PlaywrightCrawler({
+      launchContext: {
+        launchOptions: {
+          headless: false,
+        },
+      },
+
+      async requestHandler({
+        page,
+      }) {
+        await page.waitForSelector('span', {
+          state: 'attached',
+        });
+        const html = await page.innerHTML('html');
+
+        resolve(html);
+      },
+    });
+
+    crawler.run([ target ]);
+  });
+};
+
 /**
  * SourceCode Service
  */
@@ -25,22 +52,8 @@ export default class SourceCode extends Service {
    * @return
    */
   public async getSourceCode(config: GetSourceCodeParams): Promise<string> {
-    const {
-      target,
-      header,
-      enable_js_render,
-      enable_proxy,
-      extract_rule,
-      type,
-    } = config;
-    // 在这里加爬虫的逻辑
-    return `request params, ${JSON.stringify({
-      target,
-      header,
-      enable_js_render,
-      enable_proxy,
-      extract_rule,
-      type,
-    })}`;
+    const result = await createCrawler(config);
+
+    return result;
   }
 }

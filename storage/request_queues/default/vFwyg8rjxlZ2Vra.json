@@ -1,0 +1,9 @@
+{
+	"id": "vFwyg8rjxlZ2Vra",
+	"json": "{\"id\":\"vFwyg8rjxlZ2Vra\",\"url\":\"https://www.baidu.com\",\"loadedUrl\":\"https://www.baidu.com/\",\"uniqueKey\":\"https://www.baidu.com\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{},\"handledAt\":\"2022-10-16T14:33:10.125Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://www.baidu.com",
+	"url": "https://www.baidu.com"
+}

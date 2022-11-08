@@ -3,9 +3,11 @@
 
 import 'egg';
 import ExportSpider from '../../../app/controller/spider';
+import ExportWordtune from '../../../app/controller/wordtune';
 
 declare module 'egg' {
   interface IController {
     spider: ExportSpider;
+    wordtune: ExportWordtune;
   }
 }
